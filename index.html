@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PodeOuvir! - Player de Podcast</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ciano: #00ffe7;
+            --ciano-escuro: #00e1ff;
+            --azul: #3b82f6;
+            --verde: #00ffaa;
+            --fundo: #0f172a;
+            --texto: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--fundo) 0%, #16213E 100%);
+            color: var(--texto);
+            font-family: 'Exo 2', sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Estilos da aba PodeOuvir! */
+        .pode-ouvir-container {
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+            background: rgba(22, 33, 62, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 231, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 255, 231, 0.2);
+        }
+
+        .pode-ouvir-container header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--ciano);
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 20px var(--ciano), 0 0 40px var(--ciano-escuro), 0 0 60px rgba(0, 225, 255, 0.6);
+            transform: perspective(800px) rotateX(5deg) scale(1);
+            animation: pulse 3s infinite alternate;
+            letter-spacing: 2px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .pode-ouvir-container header h1 .icon-volume {
+            display: inline-block;
+            animation: colorChange 4s infinite alternate;
+        }
+
+        .pode-ouvir-container nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0 25px;
+            padding: 0 20px;
+            perspective: 1000px;
+            z-index: 10;
+        }
+
+        .pode-ouvir-container nav button {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 255, 231, 0.1));
+            border: 1px solid rgba(0, 255, 231, 0.3);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            color: var(--ciano);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 255, 231, 0.2);
+            flex: 1 1 160px;
+            min-width: 140px;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+        }
+
+        .pode-ouvir-container nav button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 255, 231, 0.4);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(0, 255, 231, 0.2));
+        }
+
+        .podcast-tab-content {
+            display: none;
+            animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        .podcast-tab-content.active {
+            display: block;
+        }
+
+        .player {
+            background: rgba(22, 33, 62, 0.7);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 255, 231, 0.3), 0 0 15px rgba(0, 255, 231, 0.5);
+            backdrop-filter: blur(15px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 255, 231, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: var(--ciano-escuro);
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px var(--ciano);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .player audio {
+            width: 100%;
+            max-width: 450px;
+            outline: none;
+            filter: drop-shadow(0 0 10px var(--ciano));
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .player audio:hover {
+            transform: scale(1.02);
+        }
+
+        .player p {
+            color: #b0c4de;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+
+        .pode-ouvir-container footer {
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #b0c4de;
+            font-family: 'Exo 2', sans-serif;
+            z-index: 10;
+            border-top: 1px solid rgba(0, 255, 231, 0.2);
+        }
+
+        /* Animações */
+        @keyframes pulse {
+            0% { 
+                text-shadow: 0 0 20px var(--ciano), 0 0 40px var(--ciano-escuro), 0 0 60px rgba(0, 225, 255, 0.6);
+                transform: perspective(800px) rotateX(5deg) scale(1);
+            }
+            100% { 
+                text-shadow: 0 0 25px var(--ciano), 0 0 50px var(--ciano-escuro), 0 0 70px rgba(0, 225, 255, 0.8);
+                transform: perspective(800px) rotateX(5deg) scale(1.03);
+            }
+        }
+
+        @keyframes colorChange {
+            0% {
+                color: var(--azul);
+                text-shadow: 0 0 20px var(--azul), 0 0 40px rgba(59, 130, 246, 0.7);
+            }
+            50% {
+                color: var(--ciano);
+                text-shadow: 0 0 20px var(--ciano), 0 0 40px rgba(0, 255, 231, 0.7);
+            }
+            100% {
+                color: var(--verde);
+                text-shadow: 0 0 20px var(--verde), 0 0 40px rgba(0, 255, 170, 0.7);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .pode-ouvir-container {
+                padding: 20px;
+            }
+            
+            .pode-ouvir-container header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .pode-ouvir-container nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .pode-ouvir-container nav button {
+                width: 100%;
+                padding: 10px 15px;
+                font-size: 0.95rem;
+            }
+            
+            .player {
+                padding: 20px;
+            }
+            
+            .player h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pode-ouvir-container header h1 {
+                font-size: 2rem;
+            }
+            
+            .player {
+                padding: 15px;
+            }
+            
+            .player h2 {
+                font-size: 1.1rem;
+            }
+            
+            .pode-ouvir-container nav button {
+                min-width: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Aba PodeOuvir! -->
+        <div class="pode-ouvir-container">
+            <header>
+                <h1><span class="icon-volume"><i class="fas fa-volume-up"></i></span> PodeOuvir!</h1>
+            </header>
+
+            <nav>
+                <button onclick="openPodcastTab('episodio1')"><i class="fas fa-microphone-alt"></i> Episódio 1</button>
+                <button onclick="openPodcastTab('episodio2')"><i class="fas fa-microphone-alt"></i> Episódio 2</button>
+                <button onclick="openPodcastTab('episodio3')"><i class="fas fa-microphone-alt"></i> Episódio 3</button>
+            </nav>
+
+            <section id="episodio1" class="podcast-tab-content active">
+                <div class="player">
+                    <h2><i class="fas fa-headphones-alt"></i> Novo Manual de Ouvidoria</h2>
+                    <audio controls>
+                        <source src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/main/PodCast_NovoManualOuvidoria.mp3" type="audio/mpeg">
+                        Seu navegador não suporta áudio.
+                    </audio>
+                </div>
+            </section>
+
+            <section id="episodio2" class="podcast-tab-content">
+                <div class="player">
+                    <h2><i class="fas fa-rocket"></i> Episódio Futuro</h2>
+                    <p>Em breve... Prepare-se para mais insights!</p>
+                </div>
+            </section>
+
+            <section id="episodio3" class="podcast-tab-content">
+                <div class="player">
+                    <h2><i class="fas fa-rocket"></i> Episódio Futuro</h2>
+                    <p>Em breve... Prepare-se para mais insights!</p>
+                </div>
+            </section>
+
+            <footer>
+                <p>© 2025 Ouvidoria Geral - PodeOuvir!</p>
+                <p>Desenvolvido por Eduardo Fernando de Souza</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Função para abrir as abas de podcast
+        function openPodcastTab(tabId) {
+            // Ocultar todos os conteúdos de podcast
+            document.querySelectorAll('.podcast-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Mostrar o conteúdo selecionado
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // Inicialização
+        function init() {
+            // Inicialmente mostrar apenas o primeiro episódio
+            openPodcastTab('episodio1');
+        }
+
+        // Inicia o player quando o DOM estiver carregado
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
