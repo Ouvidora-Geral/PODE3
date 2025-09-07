@@ -14,6 +14,7 @@
             --azul-neon: #00bfff;
             --azul-neon-claro: #40e0ff;
             --azul-neon-escuro: #0099cc;
+            --azul-linhas: #1e90ff;
             --fundo: #0f172a;
             --texto: #ffffff;
         }
@@ -44,7 +45,7 @@
             flex-direction: column;
             align-items: center;
             gap: 30px;
-            padding: 40px 20px;
+            padding: 40极 20px;
             z-index: 1;
         }
 
@@ -59,9 +60,9 @@
             border-radius: 20px;
             background: rgba(10, 20, 30, 0.6);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(127, 255, 212, 0.2);
-            box-shadow: 0 5px 25px rgba(127, 255, 212, 极.15),
-                        0 0 60px rgba(127, 255, 212, 0.1) inset;
+            border: 1px solid var(--azul-linhas);
+            box-shadow: 0 5px 25px rgba(30, 144, 255, 0.3),
+                        0 0 60px rgba(30, 144, 255, 0.1) inset;
         }
 
         .logo-wrapper {
@@ -96,34 +97,34 @@
             filter: drop-shadow(0 0 15px rgba(127, 255, 212, 0.6));
         }
 
-        /* Navegação */
+        /* Navegação - Botões em linha horizontal com tamanhos iguais */
         .navigation {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            width: 极00%;
+            width: 100%;
             padding: 0 10px;
         }
 
         .navigation button {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(127, 255, 212, 0.12));
-            border: 1px solid rgba(127, 255, 212, 0.3);
-            padding: 14px 22px;
-            border-radius: 50极;
-            font-size: 1.05rem;
-            color: var(--verde-agua-claro);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(30, 144, 255, 0.15));
+            border: 1px solid var(--azul-linhas);
+            padding: 14px 5px;
+            border-radius: 50px;
+            font-size: 1rem;
+            color: var(--azul-neon-claro);
             cursor: pointer;
             transition: all 0.4s ease;
             backdrop-filter: blur(10px);
-            box-shadow: 0 5px 15px rgba(127, 255, 212, 0.2);
+            box-shadow: 0 5px 15px rgba(30, 144, 255, 0.25);
             flex: 1;
-            min-width: 140px;
-            max-width: 220px;
+            min-width: 120px;
+            max-width: 180px;
             font-family: 'Orbitron', sans-serif;
             letter-spacing: 0.5px;
             position: relative;
             overflow: hidden;
+            white-space: nowrap;
         }
 
         .navigation button::before {
@@ -133,7 +134,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(170, 255, 238, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(64, 224, 255, 0.3), transparent);
             transition: 0.5s;
         }
 
@@ -143,13 +144,13 @@
 
         .navigation button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(127, 255, 212, 0.3), 
-                        0 0 25px rgba(127, 255, 212, 0.15);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(127, 255, 212, 0.15));
-            color: var(--verde-agua);
+            box-shadow: 0 8px 20px rgba(30, 144, 255, 0.4), 
+                        0 0 25px rgba(30, 144, 255, 0.2);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(30, 144, 255, 0.2));
+            color: var(--azul-neon);
         }
 
-        /* Conteúdo principal */
+        /* Conteúdo principal com linhas azuis */
         .content-container {
             width: 100%;
             display: flex;
@@ -160,44 +161,32 @@
             border-radius: 20px;
             background: rgba(10, 20, 30, 0.6);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(127, 255, 212, 0.2);
-            box-shadow: 0 5px 25px rgba(127, 255, 212, 0.15),
-                        0 0 60px rgba(127, 255, 212, 0.1) inset;
-        }
-
-        .podcast-tab-content {
-            display: none;
-            width: 100%;
-            max-width: 600px;
-            animation: fadeIn极 0.8s ease forwards;
-        }
-
-        .podcast-tab-content.active {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            border: 1px solid var(--azul-linhas);
+            box-shadow: 0 5px 25px rgba(30, 144, 255, 0.3),
+                        0 0 60px rgba(30, 144, 255, 0.1) inset;
         }
 
         .player {
             background: rgba(15, 25, 40, 0.7);
             padding: 30px;
             border-radius: 25px;
-            box-shadow: 0 5px 20px rgba(127, 255, 212, 0.2), 
-                        0 0 10px rgba(127, 255, 212, 0.1),
-                        inset 0 0 20px rgba(127, 255, 212, 0.05);
+            box-shadow: 0 5px 20px rgba(30, 144, 255, 0.3), 
+                        0 0 10极 rgba(30, 144, 255, 0.2),
+                        inset 0 0 20px rgba(30, 144, 255, 0.1);
             backdrop-filter: blur(15px);
             transition: all 0.5s ease;
-            border: 1px solid rgba(127, 255, 212, 0.2);
+            border: 1px solid var(--azul-linhas);
             width: 100%;
+            max-width: 600px;
             text-align: center;
         }
 
         .player h2 {
             margin-bottom: 20px;
             font-size: 1.5rem;
-            color: var(--verde-agua);
+            color: var(--azul-neon);
             font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 8px rgba(127, 255, 212, 0.4);
+            text-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -208,33 +197,34 @@
             width: 100%;
             max-width: 450px;
             outline: none;
-            filter: drop-shadow(0 0 8px rgba(127, 255, 212, 0.3));
+            filter: drop-shadow(0 0 8px rgba(30, 144, 255, 0.4));
             transition: transform 0.3s ease;
             background: rgba(0, 10, 20, 0.4);
             padding: 12px;
             border-radius: 12px;
             margin-top: 15px;
-            border: 1px solid rgba(127, 255, 212, 0.2);
+            border: 1px solid var(--azul-linhas);
         }
 
         .player audio:hover {
             transform: scale(1.02);
-            filter: drop-shadow(0 0 12px rgba(127, 255, 212, 0.4));
+            filter: drop-shadow(0 0 12px rgba(30, 144, 255, 0.6));
         }
 
         .player p {
             color: #cde6f5;
-            font-size: 1rem;
-            margin-top: 15px;
+            font-size: 1.2rem;
+            margin-top: 20px;
             text-shadow: 0 0 5px rgba(205, 230, 245, 0.3);
+            font-style: italic;
         }
 
-        /* Container para a logo Cofen */
+        /* Container para a logo Cofen com borda azul */
         .cofen-container {
             width: 100%;
             display: flex;
             justify-content: center;
-            margin-top: 20极;
+            margin-top: 20px;
         }
 
         .cofen-logo-wrapper {
@@ -243,17 +233,20 @@
             justify-content: center;
             align-items: center;
             padding: 10px;
+            border: 1px solid var(--azul-linhas);
+            border-radius: 12px;
+            background: rgba(10, 20, 30, 0.5);
         }
 
-        .极fen-logo-wrapper::before {
+        .cofen-logo-wrapper::before {
             content: '';
             position: absolute;
             top: -3px;
             left: -3px;
             right: -3px;
-            bottom: -3极;
+            bottom: -3px;
             background: transparent;
-            border-radius: 10px;
+            border-radius: 14px;
             animation: neonBlueGlow 3s infinite alternate;
             z-index: -1;
         }
@@ -269,7 +262,7 @@
             filter: drop-shadow(0 0 15px rgba(0, 191, 255, 0.6));
         }
 
-        /* Footer */
+        /* Footer com borda azul */
         .footer {
             margin-top: 30px;
             padding: 20px;
@@ -277,8 +270,8 @@
             color: #cde6f5;
             font-family: 'Exo 2', sans-serif;
             text-align: center;
-            border-top: 1px solid rgba(127, 255, 212, 0.2);
-            text-shadow: 0 0 5px rgba(205, 230, 245, 0.3);
+            border-top: 1px solid var(--azul-linhas);
+            text-shadow: 0 0 5px rgba(205, 230, 245, 极.3);
             width: 100%;
             background: rgba(10, 20, 30, 0.6);
             backdrop-filter: blur(10px);
@@ -288,12 +281,12 @@
         /* Animações */
         @keyframes neonGlow {
             0% {
-                box-shadow: 0 0 10px rgba(127, 255, 212, 0.3),
-                           0 0 20px rgba(127, 255, 212, 0.2);
+                box-shadow: 0 0 10px rgba(30, 144, 255, 0.4),
+                           0 0 20px rgba(30, 144, 255, 0.2);
             }
             100% {
-                box-shadow: 0 0 15px rgba(127, 255, 212, 0.4),
-                           0 0 30px rgba(127, 255, 212, 0.25);
+                box-shadow: 0 0 15px rgba(30, 144, 255, 0.6),
+                           0 0 30px rgba(30, 144, 255, 0.3);
             }
         }
 
@@ -303,23 +296,12 @@
                            0 0 16px rgba(0, 191, 255, 0.3);
             }
             100% {
-                box-shadow: 0 0 12px rgba(0, 191, 255, 0.5),
+                box-shadow: 0 0 12px rgba(0极 191, 255, 0.6),
                            0 0 24px rgba(0, 191, 255, 0.4);
             }
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Efeitos de partículas suaves */
+        /* Efeitos de partículas suaves em azul */
         .particles {
             position: fixed;
             top: 0;
@@ -332,7 +314,7 @@
 
         .particle {
             position: absolute;
-            background: rgba(127, 255, 212, 0.3);
+            background: rgba(30, 144, 255, 0.3);
             border-radius: 50%;
             animation: float 20s infinite linear;
         }
@@ -373,13 +355,12 @@
             }
             
             .navigation {
-                flex-direction: column;
-                align-items: center;
+                flex-wrap: wrap;
             }
             
             .navigation button {
-                width: 100%;
-                max-width: 280px;
+                min-width: 140px;
+                margin-bottom: 10px;
             }
             
             .player {
@@ -409,8 +390,9 @@
             }
             
             .navigation button {
-                min-width: unset;
-                padding: 12px 18px;
+                min-width: 120px;
+                padding: 12px 8px;
+                font-size: 0.9rem;
             }
             
             .small-logo {
@@ -440,61 +422,31 @@
             </div>
             
             <nav class="navigation">
-                <button onclick="openPodcastTab('episodio1')"><i class="fas fa-microphone-alt"></i> Episódio 1</button>
-                <button onclick="openPodcastTab('episodio2')"><i class="fas fa-microphone-alt"></i> Episódio 2</button>
-                <button onclick="openPodcastTab('episodio3')"><i class="fas fa-microphone-alt"></i> Episódio 3</button>
+                <button onclick="loadEpisode(1)"><i class="fas fa-microphone-alt"></i> Episódio 1</button>
+                <button onclick="loadEpisode(2)"><i class="fas fa-microphone-alt"></i> Episódio 2</button>
+                <button onclick="loadEpisode(3)"><i class="fas fa-microphone-alt"></i> Episódio 3</button>
             </nav>
         </header>
 
         <!-- Conteúdo principal -->
         <main class="content-container">
-            <section id="episodio1" class="podcast-tab-content active">
-                <div class="player">
-                    <h2><i class="fas fa-headphones-alt"></i> Novo Manual de Ouvidoria</h2>
-                    <audio controls>
-                        <source src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/main/PodCast_NovoManualOuvidoria.mp3" type="audio/mpeg">
+            <div class="player">
+                <h2 id="episodeTitle"><i class="fas fa-headphones-alt"></i> Selecione um episódio</h2>
+                <div id="audioPlayerContainer">
+                    <audio id="audioPlayer" controls>
                         Seu navegador não suporta áudio.
                     </audio>
                 </div>
-                
-                <!-- Logo Cofen com efeito neon azul -->
-                <div class="cofen-container">
-                    <div class="cofen-logo-wrapper">
-                        <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/8a54b13ab4cdf2b2fddae2ef861d938674e116fc/Logo%20Ouvidoria%20Cofen%20set%2025.png" 
-                             alt="Cofen - Ouvidoria Geral" class="cofen-logo">
-                    </div>
+                <p id="episodeMessage"></p>
+            </div>
+            
+            <!-- Logo Cofen com efeito neon azul -->
+            <div class="cofen-container">
+                <div class="cofen-logo-wrapper">
+                    <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/8a54b13ab4cdf2b2fddae2ef861d938674e116fc/Logo%20Ouvidoria%20Cofen%20set%2025.png" 
+                         alt="Cofen - Ouvidoria Geral" class="cofen-logo">
                 </div>
-            </section>
-
-            <section id="episodio2" class="podcast-tab-content">
-                <div class="player">
-                    <h2><i class="fas fa-rocket"></i> Episódio Futuro</h2>
-                    <p>Em breve... Prepare-se para mais insights!</p>
-                </div>
-                
-                <!-- Logo Cofen com efeito neon azul -->
-                <div class="cofen-container">
-                    <div class="cofen-logo-wrapper">
-                        <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/8a54b13ab4cdf2b2fddae2ef861d938674e116fc/Logo%20Ouvidoria%20Cofen%20极t%2025.png" 
-                             alt="Cofen - Ouvidoria Geral" class="cofen-logo">
-                    </div>
-                </div>
-            </section>
-
-            <section id="episodio3" class="podcast-tab-content">
-                <div class="player">
-                    <h2><i class="fas fa-rocket"></i> Episódio Futuro</h2>
-                    <p>Em breve... Prepare-se para mais insights!</p>
-                </div>
-                
-                <!-- Logo Cofen com efeito neon azul -->
-                <div class="cofen-container">
-                    <div class="cofen-logo-wrapper">
-                        <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/8a54b13ab4cdf2b2fddae2ef861d938674e116fc/Logo%20Ouvidoria%20Cofen%20set%2025.png" 
-                             alt="Cofen - Ouvidoria Geral" class="cofen-logo">
-                    </div>
-                </div>
-            </section>
+            </div>
         </main>
 
         <!-- Rodapé -->
@@ -505,15 +457,35 @@
     </div>
 
     <script>
-        // Função para abrir as abas de podcast
-        function openPodcastTab(tabId) {
-            // Ocultar todos os conteúdos de podcast
-            document.querySelectorAll('.podcast-tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
+        // Elementos do DOM
+        const audioPlayer = document.getElementById('audioPlayer');
+        const audioPlayerContainer = document.getElementById('audioPlayerContainer');
+        const episodeTitle = document.getElementById('episodeTitle');
+        const episodeMessage = document.getElementById('episodeMessage');
+        
+        // Função para carregar episódio
+        function loadEpisode(episodeNumber) {
+            // Resetar mensagem
+            episodeMessage.textContent = '';
             
-            // Mostrar o conteúdo selecionado
-            document.getElementById(tabId).classList.add('active');
+            if (episodeNumber === 1) {
+                // Episódio 1 - Novo Manual de Ouvidoria
+                episodeTitle.innerHTML = '<i class="fas fa-headphones-alt"></i> Novo Manual de Ouvidoria';
+                audioPlayer.src = 'https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/main/PodCast_NovoManualOuvidoria.mp3';
+                audioPlayer.style.display = 'block';
+                audioPlayerContainer.style.display = 'block';
+                episodeMessage.style.display = 'none';
+                
+                // Carregar e tocar o áudio
+                audioPlayer.load();
+            } else {
+                // Episódio 2 ou 3 - Em breve
+                episodeTitle.innerHTML = `<i class="fas fa-microphone-alt"></i> Episódio ${episodeNumber}`;
+                audioPlayer.style.display = 'none';
+                audioPlayerContainer.style.display = 'none';
+                episodeMessage.style.display = 'block';
+                episodeMessage.textContent = 'Em breve... Prepare-se para mais insights!';
+            }
         }
 
         // Criar efeito de partículas suaves
@@ -522,62 +494,59 @@
             const particleCount = 25;
             
             for (let i = 0; i < particleCount; i++) {
-                // Partículas verdes
-                const greenParticle = document.createElement('div');
-                greenParticle.classList.add('particle');
+                // Partículas azuis
+                const blueParticle = document.createElement('div');
+                blueParticle.classList.add('particle');
                 
-                const greenSize = Math.random() * 4 + 1;
-                greenParticle.style.width = `${greenSize}px`;
-                greenParticle.style.height = `${greenSize}px`;
+                const blueSize = Math.random() * 4 + 1;
+                blueParticle.style.width = `${blueSize}px`;
+                blueParticle.style.height = `${blueSize}px`;
                 
-                const greenPosX = Math.random() * 100;
-                const greenPosY = Math.random() * 100;
-                greenParticle.style.left = `${greenPosX}%`;
-                greenParticle.style.top = `${greenPosY}%`;
+                const bluePosX = Math.random() * 100;
+                const bluePosY = Math.random() * 100;
+                blueParticle.style.left = `${bluePosX}%`;
+                blueParticle.style.top = `${bluePosY}%`;
                 
-                const greenDelay = Math.random() * 20;
-                greenParticle.style.animationDelay = `${greenDelay}s`;
+                const blueDelay = Math.random() * 20;
+                blueParticle.style.animationDelay = `${blueDelay}s`;
                 
-                const greenDuration极 15 + Math.random() * 15;
-                greenParticle.style.animationDuration = `${greenDuration}s`;
+                const blueDuration = 15 + Math.random() * 15;
+                blueParticle.style.animationDuration = `${blueDuration}s`;
                 
-                particlesContainer.appendChild(greenParticle);
+                particlesContainer.appendChild(blueParticle);
                 
-                // Partículas azuis (menos frequentes)
+                // Partículas ciano (menos frequentes)
                 if (i % 3 === 0) {
-                    const blueParticle = document.createElement('div');
-                    blueParticle.classList.add('blue-particle');
+                    const cyanParticle = document.createElement('div');
+                    cyan极article.classList.add('blue-particle');
                     
-                    const blueSize = Math.random() * 3 + 1;
-                    blueParticle.style.width = `${blueSize}px`;
-                    blueParticle.style.height = `${blueSize}px`;
+                    const cyanSize = Math.random() * 3 + 1;
+                    cyanParticle.style.width = `${cyanSize}px`;
+                    cyanParticle.style.height = `${cyanSize}px`;
                     
-                    const bluePosX = Math.random() * 100;
-                    const bluePosY = Math.random() * 100;
-                    blueParticle.style.left = `${bluePosX}%`;
-                    blueParticle.style.top = `${bluePosY}%`;
+                    const cyanPosX = Math.random() * 100;
+                    const cyanPosY = Math.random() * 100;
+                    cyanParticle.style.left = `${cyanPosX}%`;
+                    cyanParticle.style.top = `${cyanPosY}%`;
                     
-                    const blueDelay = Math.random() * 25;
-                    blueParticle.style.animationDelay = `${blueDelay}s`;
+                    const cyanDelay = Math.random() * 25;
+                    cyanParticle.style.animationDelay = `${cyanDelay}s`;
                     
-                    const blueDuration = 20 + Math.random() * 20;
-                    blueParticle.style.animationDuration = `${blueDuration}s`;
+                    const cyanDuration = 20 + Math.random() * 20;
+                    cyanParticle.style.animationDuration = `${cyanDuration}s`;
                     
-                    particlesContainer.appendChild(blueParticle);
+                    particlesContainer.appendChild(cyanParticle);
                 }
             }
         }
 
         // Inicialização
         function init() {
-            // Inicialmente mostrar apenas o primeiro episódio
-            openPodcastTab('episodio1');
-            
             // Criar partículas
             createParticles();
         }
 
-        // Inicia o player quando o DOM estiver carregado
+        // Inicia quando o DOM estiver carregado
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
         } else {
