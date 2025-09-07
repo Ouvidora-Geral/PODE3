@@ -45,7 +45,7 @@
             flex-direction: column;
             align-items: center;
             gap: 30px;
-            padding: 40极 20px;
+            padding: 40px 20px;
             z-index: 1;
         }
 
@@ -159,10 +159,10 @@
             gap: 30px;
             padding: 30px;
             border-radius: 20px;
-            background: rgba(10, 20, 30, 0.6);
+            background: rgba(10, 20, 30, 极.6);
             backdrop-filter: blur(12px);
             border: 1px solid var(--azul-linhas);
-            box-shadow: 0 5px 25px rgba(30, 144, 255, 0.3),
+            box-shadow: 0 5极 25px rgba(30, 144, 255, 0.3),
                         0 0 60px rgba(30, 144, 255, 0.1) inset;
         }
 
@@ -171,7 +171,7 @@
             padding: 30px;
             border-radius: 25px;
             box-shadow: 0 5px 20px rgba(30, 144, 255, 0.3), 
-                        0 0 10极 rgba(30, 144, 255, 0.2),
+                        0 0 10px rgba(30, 144, 255, 0.2),
                         inset 0 0 20px rgba(30, 144, 255, 0.1);
             backdrop-filter: blur(15px);
             transition: all 0.5s ease;
@@ -219,7 +219,7 @@
             font-style: italic;
         }
 
-        /* Container para a logo Cofen com borda azul */
+        /* Container para a logo Cofen com borda azul e efeito pulsante */
         .cofen-container {
             width: 100%;
             display: flex;
@@ -236,6 +236,7 @@
             border: 1px solid var(--azul-linhas);
             border-radius: 12px;
             background: rgba(10, 20, 30, 0.5);
+            animation: cofenPulse 3s infinite ease-in-out;
         }
 
         .cofen-logo-wrapper::before {
@@ -271,7 +272,7 @@
             font-family: 'Exo 2', sans-serif;
             text-align: center;
             border-top: 1px solid var(--azul-linhas);
-            text-shadow: 0 0 5px rgba(205, 230, 245, 极.3);
+            text-shadow: 0 0 5px rgba(205, 230, 245, 0.3);
             width: 100%;
             background: rgba(10, 20, 30, 0.6);
             backdrop-filter: blur(10px);
@@ -296,8 +297,25 @@
                            0 0 16px rgba(0, 191, 255, 0.3);
             }
             100% {
-                box-shadow: 0 0 12px rgba(0极 191, 255, 0.6),
+                box-shadow: 0 0 12px rgba(0, 191, 255, 0.6),
                            0 0 24px rgba(0, 191, 255, 0.4);
+            }
+        }
+
+        /* Animação de pulsação para a logo Cofen */
+        @keyframes cofenPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(30, 144, 255, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px rgba(30, 144, 255, 0.6),
+                           0 0 30px rgba(30, 144, 255, 0.3);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(30, 144, 255, 0.4);
             }
         }
 
@@ -385,7 +403,7 @@
                 padding: 15px;
             }
             
-            .player h2 {
+            .player h极 {
                 font-size: 1.1rem;
             }
             
@@ -440,7 +458,7 @@
                 <p id="episodeMessage"></p>
             </div>
             
-            <!-- Logo Cofen com efeito neon azul -->
+            <!-- Logo Cofen com efeito pulsante -->
             <div class="cofen-container">
                 <div class="cofen-logo-wrapper">
                     <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/8a54b13ab4cdf2b2fddae2ef861d938674e116fc/Logo%20Ouvidoria%20Cofen%20set%2025.png" 
@@ -471,7 +489,7 @@
             if (episodeNumber === 1) {
                 // Episódio 1 - Novo Manual de Ouvidoria
                 episodeTitle.innerHTML = '<i class="fas fa-headphones-alt"></i> Novo Manual de Ouvidoria';
-                audioPlayer.src = 'https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/main/PodCast_NovoManualOuvidoria.mp3';
+                audioPlayer.src = 'https://raw.githubusercontent.com/Ouvidora-Geral/PODE3/107408ec0a2376f2c6bbd54830e06a72e47ccac5/PodCast_NovoManualOuvidoria.mp3';
                 audioPlayer.style.display = 'block';
                 audioPlayerContainer.style.display = 'block';
                 episodeMessage.style.display = 'none';
@@ -488,62 +506,9 @@
             }
         }
 
-        // Criar efeito de partículas suaves
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 25;
-            
-            for (let i = 0; i < particleCount; i++) {
-                // Partículas azuis
-                const blueParticle = document.createElement('div');
-                blueParticle.classList.add('particle');
-                
-                const blueSize = Math.random() * 4 + 1;
-                blueParticle.style.width = `${blueSize}px`;
-                blueParticle.style.height = `${blueSize}px`;
-                
-                const bluePosX = Math.random() * 100;
-                const bluePosY = Math.random() * 100;
-                blueParticle.style.left = `${bluePosX}%`;
-                blueParticle.style.top = `${bluePosY}%`;
-                
-                const blueDelay = Math.random() * 20;
-                blueParticle.style.animationDelay = `${blueDelay}s`;
-                
-                const blueDuration = 15 + Math.random() * 15;
-                blueParticle.style.animationDuration = `${blueDuration}s`;
-                
-                particlesContainer.appendChild(blueParticle);
-                
-                // Partículas ciano (menos frequentes)
-                if (i % 3 === 0) {
-                    const cyanParticle = document.createElement('div');
-                    cyan极article.classList.add('blue-particle');
-                    
-                    const cyanSize = Math.random() * 3 + 1;
-                    cyanParticle.style.width = `${cyanSize}px`;
-                    cyanParticle.style.height = `${cyanSize}px`;
-                    
-                    const cyanPosX = Math.random() * 100;
-                    const cyanPosY = Math.random() * 100;
-                    cyanParticle.style.left = `${cyanPosX}%`;
-                    cyanParticle.style.top = `${cyanPosY}%`;
-                    
-                    const cyanDelay = Math.random() * 25;
-                    cyanParticle.style.animationDelay = `${cyanDelay}s`;
-                    
-                    const cyanDuration = 20 + Math.random() * 20;
-                    cyanParticle.style.animationDuration = `${cyanDuration}s`;
-                    
-                    particlesContainer.appendChild(cyanParticle);
-                }
-            }
-        }
-
         // Inicialização
         function init() {
-            // Criar partículas
-            createParticles();
+            // Nenhum microfone extra será criado
         }
 
         // Inicia quando o DOM estiver carregado
