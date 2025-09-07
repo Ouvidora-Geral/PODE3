@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PodeOuvir! - Player de Podcast</title>
+    <title>PodeOuvir! - Podcast da Ouvidoria</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ciano: #00ffe7;
-            --ciano-escuro: #00e1ff;
-            --azul: #3b82f6;
-            --verde: #00ffaa;
+            --verde-agua: #7fffd4;
+            --verde-agua-claro: #aaffee;
+            --verde-agua-escuro: #60d6a9;
+            --azul-neon: #00bfff;
+            --azul-neon-claro: #40e0ff;
+            --azul-neon-escuro: #0099cc;
             --fundo: #0f172a;
             --texto: #ffffff;
         }
@@ -23,122 +25,179 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--fundo) 0%, #16213E 100%);
             color: var(--texto);
             font-family: 'Exo 2', sans-serif;
-            padding: 20px;
             min-height: 100vh;
             line-height: 1.6;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            position: relative;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #0a1929 0%, #0f172a 100%);
         }
 
-        .app-container {
+        .page-container {
             width: 100%;
             max-width: 900px;
-            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 40px 20px;
+            z-index: 1;
         }
 
-        /* Estilos da aba PodeOuvir! */
-        .pode-ouvir-container {
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            z-index: 5;
-            background: rgba(22, 33, 62, 0.3);
+        /* Header com logo e efeito neon suave */
+        .header-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            padding: 30px;
             border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 231, 0.2);
-            box-shadow: 0 10px 40px rgba(0, 255, 231, 0.2);
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(127, 255, 212, 0.2);
+            box-shadow: 0 5px 25px rgba(127, 255, 212, 极.15),
+                        0 0 60px rgba(127, 255, 212, 0.1) inset;
         }
 
-        .pode-ouvir-container header h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--ciano);
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 20px var(--ciano), 0 0 40px var(--ciano-escuro), 0 0 60px rgba(0, 225, 255, 0.6);
-            transform: perspective(800px) rotateX(5deg) scale(1);
-            animation: pulse 3s infinite alternate;
-            letter-spacing: 2px;
+        .logo-wrapper {
             position: relative;
-            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
         }
 
-        .pode-ouvir-container header h1 .icon-volume {
-            display: inline-block;
-            animation: colorChange 4s infinite alternate;
+        .logo-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: transparent;
+            border-radius: 15px;
+            animation: neonGlow 4s infinite alternate;
+            z-index: -1;
         }
 
-        .pode-ouvir-container nav {
+        .small-logo {
+            max-width: min(90%, 500px);
+            height: auto;
+            transition: all 0.5s ease;
+        }
+        
+        .small-logo:hover {
+            transform: scale(1.02);
+            filter: drop-shadow(0 0 15px rgba(127, 255, 212, 0.6));
+        }
+
+        /* Navegação */
+        .navigation {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            margin: 30px 0 25px;
-            padding: 0 20px;
-            perspective: 1000px;
-            z-index: 10;
+            width: 极00%;
+            padding: 0 10px;
         }
 
-        .pode-ouvir-container nav button {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 255, 231, 0.1));
-            border: 1px solid rgba(0, 255, 231, 0.3);
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-size: 1rem;
-            color: var(--ciano);
+        .navigation button {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(127, 255, 212, 0.12));
+            border: 1px solid rgba(127, 255, 212, 0.3);
+            padding: 14px 22px;
+            border-radius: 50极;
+            font-size: 1.05rem;
+            color: var(--verde-agua-claro);
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s ease;
             backdrop-filter: blur(10px);
-            box-shadow: 0 5px 15px rgba(0, 255, 231, 0.2);
-            flex: 1 1 160px;
+            box-shadow: 0 5px 15px rgba(127, 255, 212, 0.2);
+            flex: 1;
             min-width: 140px;
+            max-width: 220px;
             font-family: 'Orbitron', sans-serif;
             letter-spacing: 0.5px;
             position: relative;
-            transform-style: preserve-3d;
-            transform: translateZ(0);
+            overflow: hidden;
         }
 
-        .pode-ouvir-container nav button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 255, 231, 0.4);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(0, 255, 231, 0.2));
+        .navigation button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(170, 255, 238, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .navigation button:hover::before {
+            left: 100%;
+        }
+
+        .navigation button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(127, 255, 212, 0.3), 
+                        0 0 25px rgba(127, 255, 212, 0.15);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(127, 255, 212, 0.15));
+            color: var(--verde-agua);
+        }
+
+        /* Conteúdo principal */
+        .content-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(127, 255, 212, 0.2);
+            box-shadow: 0 5px 25px rgba(127, 255, 212, 0.15),
+                        0 0 60px rgba(127, 255, 212, 0.1) inset;
         }
 
         .podcast-tab-content {
             display: none;
-            animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             width: 100%;
             max-width: 600px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
+            animation: fadeIn极 0.8s ease forwards;
         }
 
         .podcast-tab-content.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .player {
-            background: rgba(22, 33, 62, 0.7);
+            background: rgba(15, 25, 40, 0.7);
             padding: 30px;
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0, 255, 231, 0.3), 0 0 15px rgba(0, 255, 231, 0.5);
+            box-shadow: 0 5px 20px rgba(127, 255, 212, 0.2), 
+                        0 0 10px rgba(127, 255, 212, 0.1),
+                        inset 0 0 20px rgba(127, 255, 212, 0.05);
             backdrop-filter: blur(15px);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(0, 255, 231, 0.2);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(127, 255, 212, 0.2);
+            width: 100%;
+            text-align: center;
         }
 
         .player h2 {
             margin-bottom: 20px;
             font-size: 1.5rem;
-            color: var(--ciano-escuro);
+            color: var(--verde-agua);
             font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 10px var(--ciano);
+            text-shadow: 0 0 8px rgba(127, 255, 212, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -149,59 +208,103 @@
             width: 100%;
             max-width: 450px;
             outline: none;
-            filter: drop-shadow(0 0 10px var(--ciano));
-            transform: scale(1);
+            filter: drop-shadow(0 0 8px rgba(127, 255, 212, 0.3));
             transition: transform 0.3s ease;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 10, 20, 0.4);
             padding: 12px;
             border-radius: 12px;
             margin-top: 15px;
+            border: 1px solid rgba(127, 255, 212, 0.2);
         }
 
         .player audio:hover {
             transform: scale(1.02);
+            filter: drop-shadow(0 0 12px rgba(127, 255, 212, 0.4));
         }
 
         .player p {
-            color: #b0c4de;
+            color: #cde6f5;
             font-size: 1rem;
             margin-top: 15px;
+            text-shadow: 0 0 5px rgba(205, 230, 245, 0.3);
         }
 
-        .pode-ouvir-container footer {
+        /* Container para a logo Cofen */
+        .cofen-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 20极;
+        }
+
+        .cofen-logo-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .极fen-logo-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3极;
+            background: transparent;
+            border-radius: 10px;
+            animation: neonBlueGlow 3s infinite alternate;
+            z-index: -1;
+        }
+
+        .cofen-logo {
+            max-width: min(80%, 300px);
+            height: auto;
+            transition: all 0.5s ease;
+        }
+        
+        .cofen-logo:hover {
+            transform: scale(1.03);
+            filter: drop-shadow(0 0 15px rgba(0, 191, 255, 0.6));
+        }
+
+        /* Footer */
+        .footer {
             margin-top: 30px;
             padding: 20px;
             font-size: 0.9rem;
-            color: #b0c4de;
+            color: #cde6f5;
             font-family: 'Exo 2', sans-serif;
-            z-index: 10;
-            border-top: 1px solid rgba(0, 255, 231, 0.2);
+            text-align: center;
+            border-top: 1px solid rgba(127, 255, 212, 0.2);
+            text-shadow: 0 0 5px rgba(205, 230, 245, 0.3);
+            width: 100%;
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
         }
 
         /* Animações */
-        @keyframes pulse {
-            0% { 
-                text-shadow: 0 0 20px var(--ciano), 0 0 40px var(--ciano-escuro), 0 0 60px rgba(0, 225, 255, 0.6);
-                transform: perspective(800px) rotateX(5deg) scale(1);
+        @keyframes neonGlow {
+            0% {
+                box-shadow: 0 0 10px rgba(127, 255, 212, 0.3),
+                           0 0 20px rgba(127, 255, 212, 0.2);
             }
-            100% { 
-                text-shadow: 0 0 25px var(--ciano), 0 0 50px var(--ciano-escuro), 0 0 70px rgba(0, 225, 255, 0.8);
-                transform: perspective(800px) rotateX(5deg) scale(1.03);
+            100% {
+                box-shadow: 0 0 15px rgba(127, 255, 212, 0.4),
+                           0 0 30px rgba(127, 255, 212, 0.25);
             }
         }
 
-        @keyframes colorChange {
+        @keyframes neonBlueGlow {
             0% {
-                color: var(--azul);
-                text-shadow: 0 0 20px var(--azul), 0 0 40px rgba(59, 130, 246, 0.7);
-            }
-            50% {
-                color: var(--ciano);
-                text-shadow: 0 0 20px var(--ciano), 0 0 40px rgba(0, 255, 231, 0.7);
+                box-shadow: 0 0 8px rgba(0, 191, 255, 0.4),
+                           0 0 16px rgba(0, 191, 255, 0.3);
             }
             100% {
-                color: var(--verde);
-                text-shadow: 0 0 20px var(--verde), 0 0 40px rgba(0, 255, 170, 0.7);
+                box-shadow: 0 0 12px rgba(0, 191, 255, 0.5),
+                           0 0 24px rgba(0, 191, 255, 0.4);
             }
         }
 
@@ -216,29 +319,67 @@
             }
         }
 
+        /* Efeitos de partículas suaves */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(127, 255, 212, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .blue-particle {
+            position: absolute;
+            background: rgba(0, 191, 255, 0.3);
+            border-radius: 50%;
+            animation: float 25s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
-            body {
-                padding: 15px;
+            .page-container {
+                padding: 30px 15px;
+                gap: 20px;
             }
             
-            .pode-ouvir-container {
+            .header-container, .content-container {
                 padding: 20px;
             }
             
-            .pode-ouvir-container header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .pode-ouvir-container nav {
+            .navigation {
                 flex-direction: column;
-                gap: 12px;
+                align-items: center;
             }
             
-            .pode-ouvir-container nav button {
+            .navigation button {
                 width: 100%;
-                padding: 10px 15px;
-                font-size: 0.95rem;
+                max-width: 280px;
             }
             
             .player {
@@ -248,13 +389,17 @@
             .player h2 {
                 font-size: 1.3rem;
             }
+            
+            .small-logo {
+                max-width: 95%;
+            }
+            
+            .cofen-logo {
+                max-width: 85%;
+            }
         }
 
         @media (max-width: 480px) {
-            .pode-ouvir-container header h1 {
-                font-size: 2rem;
-            }
-            
             .player {
                 padding: 15px;
             }
@@ -263,26 +408,46 @@
                 font-size: 1.1rem;
             }
             
-            .pode-ouvir-container nav button {
+            .navigation button {
                 min-width: unset;
+                padding: 12px 18px;
+            }
+            
+            .small-logo {
+                max-width: 100%;
+            }
+            
+            .header-container {
+                padding: 20px 15px;
+            }
+            
+            .cofen-logo {
+                max-width: 95%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Aba PodeOuvir! -->
-        <div class="pode-ouvir-container">
-            <header>
-                <h1><span class="icon-volume"><i class="fas fa-volume-up"></i></span> PodeOuvir!</h1>
-            </header>
-
-            <nav>
+    <!-- Efeito de partículas suaves -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="page-container">
+        <!-- Cabeçalho com a nova capa e efeito neon suave -->
+        <header class="header-container">
+            <div class="logo-wrapper">
+                <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/8a54b13ab4cdf2b2fddae2ef861d938674e116fc/podeouvir-capa4.png" 
+                     alt="PodeOuvir! - O Podcast da Ouvidoria-Geral" class="small-logo">
+            </div>
+            
+            <nav class="navigation">
                 <button onclick="openPodcastTab('episodio1')"><i class="fas fa-microphone-alt"></i> Episódio 1</button>
                 <button onclick="openPodcastTab('episodio2')"><i class="fas fa-microphone-alt"></i> Episódio 2</button>
                 <button onclick="openPodcastTab('episodio3')"><i class="fas fa-microphone-alt"></i> Episódio 3</button>
             </nav>
+        </header>
 
+        <!-- Conteúdo principal -->
+        <main class="content-container">
             <section id="episodio1" class="podcast-tab-content active">
                 <div class="player">
                     <h2><i class="fas fa-headphones-alt"></i> Novo Manual de Ouvidoria</h2>
@@ -291,12 +456,28 @@
                         Seu navegador não suporta áudio.
                     </audio>
                 </div>
+                
+                <!-- Logo Cofen com efeito neon azul -->
+                <div class="cofen-container">
+                    <div class="cofen-logo-wrapper">
+                        <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/8a54b13ab4cdf2b2fddae2ef861d938674e116fc/Logo%20Ouvidoria%20Cofen%20set%2025.png" 
+                             alt="Cofen - Ouvidoria Geral" class="cofen-logo">
+                    </div>
+                </div>
             </section>
 
             <section id="episodio2" class="podcast-tab-content">
                 <div class="player">
                     <h2><i class="fas fa-rocket"></i> Episódio Futuro</h2>
                     <p>Em breve... Prepare-se para mais insights!</p>
+                </div>
+                
+                <!-- Logo Cofen com efeito neon azul -->
+                <div class="cofen-container">
+                    <div class="cofen-logo-wrapper">
+                        <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/8a54b13ab4cdf2b2fddae2ef861d938674e116fc/Logo%20Ouvidoria%20Cofen%20极t%2025.png" 
+                             alt="Cofen - Ouvidoria Geral" class="cofen-logo">
+                    </div>
                 </div>
             </section>
 
@@ -305,13 +486,22 @@
                     <h2><i class="fas fa-rocket"></i> Episódio Futuro</h2>
                     <p>Em breve... Prepare-se para mais insights!</p>
                 </div>
+                
+                <!-- Logo Cofen com efeito neon azul -->
+                <div class="cofen-container">
+                    <div class="cofen-logo-wrapper">
+                        <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/8a54b13ab4cdf2b2fddae2ef861d938674e116fc/Logo%20Ouvidoria%20Cofen%20set%2025.png" 
+                             alt="Cofen - Ouvidoria Geral" class="cofen-logo">
+                    </div>
+                </div>
             </section>
+        </main>
 
-            <footer>
-                <p>© 2025 Ouvidoria Geral - PodeOuvir!</p>
-                <p>Desenvolvido por Eduardo Fernando de Souza</p>
-            </footer>
-        </div>
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p>© 2025 Ouvidoria Geral - PodeOuvir!</p>
+            <p>Desenvolvido por Eduardo Fernando de Souza</p>
+        </footer>
     </div>
 
     <script>
@@ -326,10 +516,65 @@
             document.getElementById(tabId).classList.add('active');
         }
 
+        // Criar efeito de partículas suaves
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 25;
+            
+            for (let i = 0; i < particleCount; i++) {
+                // Partículas verdes
+                const greenParticle = document.createElement('div');
+                greenParticle.classList.add('particle');
+                
+                const greenSize = Math.random() * 4 + 1;
+                greenParticle.style.width = `${greenSize}px`;
+                greenParticle.style.height = `${greenSize}px`;
+                
+                const greenPosX = Math.random() * 100;
+                const greenPosY = Math.random() * 100;
+                greenParticle.style.left = `${greenPosX}%`;
+                greenParticle.style.top = `${greenPosY}%`;
+                
+                const greenDelay = Math.random() * 20;
+                greenParticle.style.animationDelay = `${greenDelay}s`;
+                
+                const greenDuration极 15 + Math.random() * 15;
+                greenParticle.style.animationDuration = `${greenDuration}s`;
+                
+                particlesContainer.appendChild(greenParticle);
+                
+                // Partículas azuis (menos frequentes)
+                if (i % 3 === 0) {
+                    const blueParticle = document.createElement('div');
+                    blueParticle.classList.add('blue-particle');
+                    
+                    const blueSize = Math.random() * 3 + 1;
+                    blueParticle.style.width = `${blueSize}px`;
+                    blueParticle.style.height = `${blueSize}px`;
+                    
+                    const bluePosX = Math.random() * 100;
+                    const bluePosY = Math.random() * 100;
+                    blueParticle.style.left = `${bluePosX}%`;
+                    blueParticle.style.top = `${bluePosY}%`;
+                    
+                    const blueDelay = Math.random() * 25;
+                    blueParticle.style.animationDelay = `${blueDelay}s`;
+                    
+                    const blueDuration = 20 + Math.random() * 20;
+                    blueParticle.style.animationDuration = `${blueDuration}s`;
+                    
+                    particlesContainer.appendChild(blueParticle);
+                }
+            }
+        }
+
         // Inicialização
         function init() {
             // Inicialmente mostrar apenas o primeiro episódio
             openPodcastTab('episodio1');
+            
+            // Criar partículas
+            createParticles();
         }
 
         // Inicia o player quando o DOM estiver carregado
