@@ -66,30 +66,6 @@
             z-index: 10;
         }
 
-        /* Logo e cabeçalho */
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-            perspective: 800px; /* Adicionado perspectiva */
-        }
-        
-        .logo {
-            max-width: 350px;
-            height: auto;
-            border-radius: 15px;
-            border: 3px solid var(--ciano);
-            box-shadow: 0 0 25px var(--ciano), 0 0 50px var(--ciano-escuro);
-            transition: all 0.5s ease;
-            transform: rotateY(0deg) translateZ(0px); /* Inicialização do 3D */
-        }
-        
-        .logo:hover {
-            transform: rotateY(10deg) translateZ(20px) scale(1.05);
-            box-shadow: 0 0 30px var(--ciano), 0 0 60px var(--ciano-escuro);
-        }
-
         /* Estilos da aba PodeOuvir! */
         .pode-ouvir-container {
             padding: 30px;
@@ -102,56 +78,29 @@
             border: 1px solid rgba(0, 255, 231, 0.2);
             box-shadow: 0 10px 40px rgba(0, 255, 231, 0.2);
         }
-
-        .pode-ouvir-container header {
-            margin-bottom: 25px;
+        
+        /* Logo no topo do container principal */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            perspective: 800px;
         }
-
-        .pode-ouvir-container header h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--ciano);
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 20px var(--ciano), 0 0 40px var(--ciano-escuro), 0 0 60px rgba(0, 225, 255, 0.6);
-            transform: perspective(800px) rotateX(5deg) scale(1);
-            animation: pulse 3s infinite alternate;
-            letter-spacing: 2px;
-            position: relative;
-            user-select: none;
-            cursor: default;
+        
+        .logo {
+            max-width: 350px;
+            height: auto;
+            border-radius: 15px;
+            border: 3px solid var(--ciano);
+            box-shadow: 0 0 25px var(--ciano), 0 0 50px var(--ciano-escuro);
+            transition: all 0.5s ease;
+            transform: rotateY(0deg) translateZ(0px);
         }
-
-        /* Novo efeito Glitch */
-        .pode-ouvir-container header h1::before,
-        .pode-ouvir-container header h1::after {
-            content: 'PodeOuvir!';
-            position: absolute;
-            top: 0;
-            left: 0;
-            text-shadow: none;
-            clip-path: inset(calc(var(--y) * 1%) 0 0 0);
-            animation: glitchText 4s infinite alternate;
-        }
-
-        .pode-ouvir-container header h1::after {
-            color: var(--roxo);
-            clip-path: inset(0 0 calc(var(--y) * 1%) 0);
-        }
-
-        @keyframes glitchText {
-            0% { --y: 0; clip-path: inset(0 0 100% 0); }
-            5% { --y: 10; }
-            10% { --y: 90; }
-            15% { --y: 30; }
-            20% { --y: 70; }
-            25% { --y: 0; clip-path: inset(0 0 100% 0); }
-            100% { --y: 0; clip-path: inset(0 0 0 0); }
-        }
-
-        .pode-ouvir-container header h1 .icon-volume {
-            display: inline-block;
-            animation: colorChange 4s infinite alternate;
-            margin-right: 10px;
+        
+        .logo:hover {
+            transform: rotateY(10deg) translateZ(20px) scale(1.05);
+            box-shadow: 0 0 30px var(--ciano), 0 0 60px var(--ciano-escuro);
         }
 
         .pode-ouvir-container nav {
@@ -205,11 +154,6 @@
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 255, 231, 0.15));
         }
         
-        .pode-ouvir-container nav button:hover::before {
-            opacity: 1;
-            animation: neonPulse 1.5s infinite alternate;
-        }
-
         .pode-ouvir-container nav button.active {
             background: linear-gradient(135deg, rgba(0, 255, 231, 0.2), rgba(0, 255, 170, 0.2));
             box-shadow: 0 0 20px rgba(0, 255, 231, 0.5);
@@ -266,7 +210,7 @@
             justify-content: center;
             gap: 15px;
             margin-bottom: 15px;
-            flex-wrap: wrap; /* Adicionado para responsividade */
+            flex-wrap: wrap;
         }
 
         .play-btn {
@@ -396,7 +340,7 @@
             background: linear-gradient(to top, var(--ciano), var(--verde));
             border-radius: 2px 2px 0 0;
             transition: height 0.1s ease;
-            animation: wave 1.5s infinite alternate; /* Nova animação */
+            animation: wave 1.5s infinite alternate;
         }
 
         /* Animação para o visualizador */
@@ -448,33 +392,7 @@
             text-shadow: 0 0 10px var(--verde), 0 0 15px var(--ciano-escuro);
         }
 
-        /* Animações */
-        @keyframes pulse {
-            0% { 
-                text-shadow: 0 0 20px var(--ciano), 0 0 40px var(--ciano-escuro), 0 0 60px rgba(0, 225, 255, 0.6);
-                transform: perspective(800px) rotateX(5deg) scale(1);
-            }
-            100% { 
-                text-shadow: 0 0 25px var(--ciano), 0 0 50px var(--ciano-escuro), 0 0 70px rgba(0, 225, 255, 0.8);
-                transform: perspective(800px) rotateX(5deg) scale(1.03);
-            }
-        }
-
-        @keyframes colorChange {
-            0% {
-                color: var(--azul);
-                text-shadow: 0 0 20px var(--azul), 0 0 40px rgba(59, 130, 246, 0.7);
-            }
-            50% {
-                color: var(--ciano);
-                text-shadow: 0 0 20px var(--ciano), 0 0 40px rgba(0, 255, 231, 0.7);
-            }
-            100% {
-                color: var(--verde);
-                text-shadow: 0 0 20px var(--verde), 0 0 40px rgba(0, 255, 170, 0.7);
-            }
-        }
-        
+        /* Animações gerais */
         @keyframes neonPulse {
             from { box-shadow: 0 0 10px var(--ciano), 0 0 20px var(--azul); }
             to { box-shadow: 0 0 15px var(--ciano), 0 0 30px var(--azul), 0 0 40px var(--roxo); }
@@ -501,8 +419,8 @@
                 padding: 20px;
             }
             
-            .pode-ouvir-container header h1 {
-                font-size: 2.2rem;
+            .logo {
+                max-width: 280px;
             }
             
             .pode-ouvir-container nav {
@@ -522,10 +440,6 @@
             .player h2 {
                 font-size: 1.3rem;
             }
-            
-            .logo {
-                max-width: 280px;
-            }
 
             .player-controls {
                 flex-wrap: wrap;
@@ -537,8 +451,8 @@
         }
 
         @media (max-width: 480px) {
-            .pode-ouvir-container header h1 {
-                font-size: 1.8rem;
+            .logo {
+                max-width: 220px;
             }
             
             .player {
@@ -558,10 +472,6 @@
                 width: 100%;
                 max-width: 250px;
             }
-            
-            .logo {
-                max-width: 220px;
-            }
 
             .play-btn {
                 width: 45px;
@@ -576,14 +486,12 @@
 </head>
 <body>
     <div class="app-container">
-        <div class="logo-container">
-            <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/2e21cebd8846f59caeda2ae8f088857db83f6de9/podeouvir-capa4.png" 
-                 alt="PodeOuvir! - O Podcast da Ouvidoria-Geral" class="logo">
-        </div>
-        
         <div class="pode-ouvir-container">
             <header>
-                <h1><span class="icon-volume"><i class="fas fa-podcast"></i></span> PodeOuvir!</h1>
+                <div class="logo-container">
+                    <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/2e21cebd8846f59caeda2ae8f088857db83f6de9/podeouvir-capa4.png" 
+                         alt="PodeOuvir! - O Podcast da Ouvidoria-Geral" class="logo">
+                </div>
             </header>
 
             <nav>
@@ -644,11 +552,7 @@
                     <p>Em breve... Prepare-se para mais insights!</p>
                 </div>
                 
-                <img src="https://raw.githubusercontent.com/Ouvidora-Geral/PodeOuvir/173afaf8fc7e96f214748939729433638fb2891f/Logo_Ouvidoria_Cofen_set_25.png" 
-                      alt="Logo da Ouvidoria" class="logo-ouvidoria">
-            </section>
-
-            <footer>
+               <footer>
                 <p>© 2025 Ouvidoria Geral - PodeOuvir!</p>
                 <p>Desenvolvido por Eduardo Fernando de Souza</p>
                 <div class="social-icons">
@@ -681,7 +585,7 @@
             const bar = document.createElement('div');
             bar.className = 'visualizer-bar';
             bar.style.height = `${Math.random() * 30 + 5}px`;
-            bar.style.animationDelay = `${i * 0.05}s`; /* Adicionado para um efeito de onda */
+            bar.style.animationDelay = `${i * 0.05}s`;
             visualizer.appendChild(bar);
         }
         
@@ -705,7 +609,6 @@
                 animateVisualizer();
             }).catch(e => {
                 console.error("Erro ao tentar reproduzir o áudio:", e);
-                // Lidar com erros de autoplay
                 playBtn.innerHTML = '<i class="fas fa-play"></i>';
                 playBtn.classList.remove('playing');
                 stopVisualizer();
@@ -791,20 +694,19 @@
 
         // Função para abrir as abas de podcast
         function openPodcastTab(tabId, audioSrc = null) {
-            // Ocultar todos os conteúdos de podcast
             document.querySelectorAll('.podcast-tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
             
-            // Mostrar o conteúdo selecionado
             const activeTab = document.getElementById(tabId);
             activeTab.classList.add('active');
             
-            // Atualizar botão ativo
             navButtons.forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`button[onclick="openPodcastTab('${tabId}', '${audioSrc}')"]`).classList.add('active');
+            const targetButton = document.querySelector(`button[onclick*="openPodcastTab('${tabId}'"]`);
+            if (targetButton) {
+                targetButton.classList.add('active');
+            }
 
-            // Pausar áudio se estiver tocando
             if (!audioPlayer.paused) {
                 audioPlayer.pause();
                 playBtn.innerHTML = '<i class="fas fa-play"></i>';
@@ -812,11 +714,10 @@
                 stopVisualizer();
             }
 
-            // Se um novo áudio for fornecido, carregar
             if (audioSrc) {
                 audioPlayer.src = audioSrc;
                 audioPlayer.load();
-                durationEl.textContent = '0:00'; // Resetar a duração ao carregar um novo áudio
+                durationEl.textContent = '0:00';
                 progressBar.style.width = '0%';
                 currentTimeEl.textContent = '0:00';
             }
@@ -824,19 +725,16 @@
 
         // Inicialização
         function init() {
-            // Acessar o primeiro botão para pegar a URL de áudio inicial
             const firstButton = document.querySelector('.pode-ouvir-container nav button.active');
             if (firstButton) {
-                const initialAudioSrc = firstButton.getAttribute('onclick').split("'")[3];
+                const initialAudioSrc = firstButton.getAttribute('onclick').split("','")[1].slice(0, -2);
                 openPodcastTab('episodio1', initialAudioSrc);
             } else {
-                openPodcastTab('episodio1'); // fallback
+                openPodcastTab('episodio1');
             }
-            
             stopVisualizer();
         }
 
-        // Inicia o player quando o DOM estiver carregado
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
         } else {
